@@ -1,7 +1,7 @@
 
 const CategoriesSchema = (sequelize, DataTypes) => {
   const categories = sequelize.define(
-    "categorie",
+    "Category",
     {
       id: {
         type: DataTypes.INTEGER,
