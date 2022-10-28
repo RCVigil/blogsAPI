@@ -1,6 +1,6 @@
 const blogPostsSchema = (sequelize, DataTypes) => {
   const blog_posts = sequelize.define(
-    "blog_post",
+    "BlogPost",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -14,10 +14,18 @@ const blogPostsSchema = (sequelize, DataTypes) => {
     },
     {
       tableName: "blog_posts",
-      underscored: true,
+      underscored: false,
       timestamps: false,
     }
   );
+
+  blog_posts.associate = (models) => {
+    blog_posts.belongsTo(models.User, {
+      foreignKey: 'user_id',
+      as: 'user',
+    })
+  };
+
   return blog_posts;
 };
 
