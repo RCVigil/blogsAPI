@@ -8,4 +8,6 @@ const validateToken = async (req, _res, next) => {
     next();
 };
 
-module.exports = { validateToken };
+module.exports = {
+  validateToken,
+};

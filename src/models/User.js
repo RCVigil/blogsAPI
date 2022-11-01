@@ -1,5 +1,5 @@
-
 const UsersSchema = (sequelize, DataTypes) => {
+
   const Users = sequelize.define(
     "User",
     {
@@ -7,14 +7,14 @@ const UsersSchema = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
       },
-      display_name: DataTypes.STRING,
+      displayName: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       image: DataTypes.STRING,
     },
     {
       tableName: "users",
-      underscored: false,
+      underscored: true,
       timestamps: false,
     }
   );

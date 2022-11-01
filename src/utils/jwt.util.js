@@ -10,16 +10,26 @@ const createToken = (data) => {
     return token;
 };
 
-const validateToken = (token) => {
-    try {
-        const { data } = jwt.verify(token, process.env.JWT_SECRET);
+const validateToken = (req, _res, next) => {
+  const data = req.headers.authorization;
+  // console.log('DATA do validateToken é   ===   ', data);
 
-        return data;
-    } catch (error) {
-        const e = new Error('Token inválido');
-        e.name = 'Não válido';
-        throw e;
-    }
+  if (!data) {
+    const err = new Error('Token not found');
+    err.status = 401;
+    return next(err);
+  }
+
+  try {
+    const payload = jwt.verify(data, process.env.JWT_SECRET);
+    req.user = payload;
+    // console.log('O PAYLOAD NO JWT.UTILS É ===   ', payload);
+    return next();
+  } catch (error) {
+    const err = new Error('Expired or invalid token');
+    err.status = 401;
+    return next(err);
+  }
 };
 
 module.exports = { createToken, validateToken };
