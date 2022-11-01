@@ -16,11 +16,20 @@ const getAll = async () => {
   return todosUsuarios;
 };
 
+const getServiceId = async (id) => {
+  const usuarios = await User.findOne({ where: { id }, attributes: { exclude: ['password'] },
+  });
+
+  console.log('GETSERVICE-ID NO BANCO DE DADOS É', usuarios);
+  return usuarios;
+};
+
 const addUSerService = async () => {
   console.log(' # # # # # ENTREI NA ADD_USER_SERVICE # # # # # #');
 };
 
 module.exports = {
   getAll,
+  getServiceId,
   addUSerService,
 };

@@ -4,7 +4,6 @@ const jwtUtil = require('../utils/jwt.util');
 const { User } = require('../models');
 
 const validateBody = (params) => {
-  // console.log('O params de validateBody é: ', params);
   const schema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
@@ -25,7 +24,6 @@ const validateBody = (params) => {
 
 const validateLogin = async ({ email, password }) => {
   const user = await User.findOne({ where: { email } });
-  console.log('LS.22 =   ', user);
 
   if (!user || user.password !== password) {
     const e = {
