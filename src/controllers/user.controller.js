@@ -1,4 +1,5 @@
 const userService = require('../services/user.service');
+const authService = require('../services/login.service');
 
 const getAllUsers = async (_req, res) => {
   const buscaUser = await userService.getAll();
@@ -20,12 +21,13 @@ const getUserId = async (req, res) => {
 };
 
 const addUser = async (req, res) => {
-  console.log('Entrei no addUser');
   const { displayName, email, password, image } = req.body;
 
-  const newUser = await userService.addUSerService(displayName, email, password, image);
+  await userService.addUSerService({ displayName, email, password, image });
 
-  return res.status(201).json({ newUser });
+  const token = await authService.validateLogin({ email, password });
+
+  return res.status(201).json({ token });
 };
 
 module.exports = {

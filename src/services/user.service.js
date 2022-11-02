@@ -24,12 +24,29 @@ const getServiceId = async (id) => {
   return usuarios;
 };
 
-const addUSerService = async () => {
-  console.log(' # # # # # ENTREI NA ADD_USER_SERVICE # # # # # #');
+const getServiceEmail = async (email) => {
+  console.log('EMAIL NA SERVICE:      ', email);
+  const emailOne = await User.findOne({ where: { email }, attributes: { exclude: ['password'] },
+  });
+
+  return emailOne;
+};
+
+const addUSerService = async ({ displayName, email, password, image }, next) => {
+  const emailDb = await User.findOne({ where: { email } });
+
+  if (emailDb) {
+    const err = new Error({ message: 'User already registered' });
+    err.status = 409;
+    return next(err);
+  }
+
+  await User.create({ displayName, email, password, image });
 };
 
 module.exports = {
   getAll,
   getServiceId,
+  getServiceEmail,
   addUSerService,
 };
