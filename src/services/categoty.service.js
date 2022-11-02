@@ -15,6 +15,7 @@ const getAll = async () => {
       id: ct.id,
       name: ct.name,
     };
+
     return data;
   });
 
