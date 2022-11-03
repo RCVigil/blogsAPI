@@ -1,6 +1,6 @@
 
 const CategoriesSchema = (sequelize, DataTypes) => {
-  const categories = sequelize.define(
+  const Category = sequelize.define(
     "Categories",
     {
       id: {
@@ -15,7 +15,7 @@ const CategoriesSchema = (sequelize, DataTypes) => {
       timestamps: false,
     }
   );
-  return categories;
+  return Category;
 };
 
 module.exports = CategoriesSchema;

@@ -1,11 +1,11 @@
-const { BlogPost, User, Category } = require('../models/index');
+const { BlogPosts, User, Categories } = require('../models');
 
 const getBlogPostAll = async () => {
-  console.log('O BLOGPOST É === ', BlogPost);
-  const posts = await BlogPost.findAll({
+  console.log('blogPostService', BlogPosts, User, Categories);
+  const posts = await BlogPosts.findAll({
     include: [
       { model: User, as: 'user', attributes: { exclude: ['password'] } },
-      { model: Category, as: 'categories', through: { attributes: [] } },
+      { model: Categories, as: 'categories', through: { attributes: [] } },
     ],
   });
   console.log(
