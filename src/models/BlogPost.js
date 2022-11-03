@@ -1,6 +1,6 @@
 const blogPostsSchema = (sequelize, DataTypes) => {
-  const BlogPost = sequelize.define(
-    "BlogPosts",
+  const BlogPosts = sequelize.define(
+    "BlogPost",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -20,14 +20,14 @@ const blogPostsSchema = (sequelize, DataTypes) => {
     }
   );
 
-  BlogPost.associate = (models) => {
-    BlogPost.belongsTo(models.User, {
+  BlogPosts.associate = (models) => {
+    BlogPosts.belongsTo(models.User, {
       foreignKey: 'userId',
       as: 'user',
     })
   };
 
-  return BlogPost;
+  return BlogPosts;
 };
 
 module.exports = blogPostsSchema;
